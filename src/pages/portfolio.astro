@@ -1,229 +1,329 @@
 ---
 import Base from '../layouts/Base.astro';
 import { url } from '../lib/url';
-import { MessageCircle, Plus, Truck, Ruler, ShieldCheck, Wrench, Phone, MapPin } from '@lucide/astro';
+import { MessageCircle, Plus, Truck, Ruler, ShieldCheck, Wrench, Phone, MapPin, ArrowDown } from '@lucide/astro';
 import { categorias, clientes, cases, diretores } from '../data/portfolio';
 import { whatsapp, whatsappPadrao } from '../data/contato';
 import { unidades, googleMaps } from '../data/unidades';
 
 const diferenciais = [
-  { icon: Truck, texto: 'Entrega e retirada no prazo combinado, com troca imediata quando preciso.' },
-  { icon: Ruler, texto: 'Visita prévia ao canteiro para indicar a melhor solução.' },
-  { icon: ShieldCheck, texto: 'Projetos de montagem de andaimes e escoramentos conforme a ABNT.' },
-  { icon: Wrench, texto: 'Pós-venda e suporte na montagem, remessas, trocas e devoluções.' },
+  { icon: Truck, titulo: 'Entrega no prazo', texto: 'Entrega e retirada no prazo combinado, com troca imediata quando preciso.' },
+  { icon: Ruler, titulo: 'Visita técnica', texto: 'Visita prévia ao canteiro para indicar a melhor solução.' },
+  { icon: ShieldCheck, titulo: 'Projeto conforme a ABNT', texto: 'Projetos de montagem de andaimes e escoramentos dentro das normas.' },
+  { icon: Wrench, titulo: 'Suporte de verdade', texto: 'Pós-venda e apoio na montagem, remessas, trocas e devoluções.' },
+];
+
+const menu = [
+  ['sobre', 'Quem somos'],
+  ['obras', 'Obras'],
+  ['equipamentos', 'Equipamentos'],
+  ['contato', 'Contato'],
 ];
 
 const rotulo = 'text-xs font-semibold uppercase tracking-[0.18em]';
+const container = 'mx-auto w-full max-w-6xl px-6 lg:px-10';
+const ehFoto = (src: string) => /\/(case|obra)-/.test(src);
+const orcamento = (nome: string) => whatsapp(`Olá! Vim pelo portfólio e quero um orçamento de: ${nome}.`);
 ---
 
 <Base
   title="Portfólio | AM2 Locações"
   description="Andaimes, escoras metálicas e equipamentos para construção civil. Clientes, obras e contato da AM2 Locações."
 >
-  <header class="relative isolate overflow-hidden bg-am2-ink text-white">
-    <img
-      src={url('/img/portfolio/capa.webp')}
-      alt=""
-      width="1200"
-      height="1600"
-      fetchpriority="high"
-      class="absolute inset-0 -z-10 h-full w-full object-cover object-[50%_30%] opacity-45"
-    />
-    <div class="absolute inset-0 -z-10 bg-gradient-to-t from-am2-ink via-am2-ink/70 to-am2-ink/30" aria-hidden="true"></div>
-    <div class="mx-auto max-w-md px-6 pb-14 pt-14">
-      <img src={url('/img/logo-am2.webp')} alt="AM2 Locações" width="640" height="160" class="h-auto w-40" />
-      <p class={`mt-24 ${rotulo} text-am2-red`}>Portfólio</p>
-      <h1 class="mt-2 text-[2.5rem] font-extrabold leading-[1.02] tracking-tight">
-        Tudo para a<br />sua obra.
-      </h1>
-      <p class="mt-4 max-w-[18rem] leading-relaxed text-white/80">
-        Andaimes, escoras e equipamentos para obras de pequeno, médio e grande porte.
-      </p>
-    </div>
-  </header>
-
-  <nav aria-label="Seções" class="sticky top-0 z-20 border-b border-am2-line bg-am2-paper/95 backdrop-blur">
-    <ul class="mx-auto flex max-w-md gap-2 overflow-x-auto px-6 py-3">
-      {[['obras', 'Obras'], ...categorias.map((c) => [c.id, c.titulo]), ['contato', 'Contato']].map(([id, nome]) => (
-        <li class="shrink-0">
-          <a href={`#${id}`} class="inline-flex min-h-10 items-center border border-am2-ink/20 bg-white px-4 text-sm font-semibold hover:border-am2-ink">
-            {nome}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </nav>
-
-  <main>
-  <div class="mx-auto max-w-md px-6">
-    <section class="pt-14" aria-labelledby="sobre">
-      <p class={`${rotulo} text-am2-red`}>Quem somos</p>
-      <h2 id="sobre" class="mt-2 text-[1.75rem] font-extrabold leading-tight tracking-tight">
-        Equipamento certo, no prazo, sem dor de cabeça.
-      </h2>
-      <p class="mt-4 leading-relaxed text-am2-ink/80">
-        A AM2 é especializada em locação de equipamentos para construção civil. Atendemos obras de todos os portes,
-        com soluções inteligentes e econômicas para quem vai reformar ou construir.
-      </p>
-      <p class="mt-3 leading-relaxed text-am2-ink/80">
-        Você cuida da obra. A logística dos equipamentos fica com a gente.
-      </p>
-      <ul class="mt-8 space-y-4">
-        {diferenciais.map(({ icon: Icon, texto }) => (
-          <li class="flex gap-3 text-[0.95rem] leading-snug">
-            <Icon size={20} strokeWidth={1.75} class="mt-0.5 shrink-0 text-am2-red" aria-hidden="true" />
-            {texto}
-          </li>
-        ))}
-      </ul>
-    </section>
-
-    <section class="pt-20" aria-labelledby="clientes">
-      <p class={`${rotulo} text-am2-ink/60`} id="clientes">Principais clientes</p>
-      <ul class="mt-5 grid grid-cols-3 gap-px border border-am2-line bg-am2-line">
-        {clientes.map((c) => (
-          <li class="aspect-[3/2] bg-white p-3">
-            <img src={c.logo} alt={c.nome} loading="lazy" class="h-full w-full object-contain" />
-          </li>
-        ))}
-      </ul>
-    </section>
-  </div>
-
-  <section id="obras" class="mt-20 scroll-mt-16 bg-am2-ink py-16 text-white" aria-labelledby="titulo-obras">
-    <div class="mx-auto max-w-md px-6">
-      <p class={`${rotulo} text-am2-red`}>Cases de sucesso</p>
-      <h2 id="titulo-obras" class="mt-2 text-[1.75rem] font-extrabold leading-tight tracking-tight">Obras que atendemos</h2>
-
-      <div class="mt-10 space-y-16">
-        {cases.map((c, i) => (
-          <article>
-            {c.fotos.length === 1 && (
-              <img src={c.fotos[0].src} alt={c.fotos[0].alt} width={c.fotos[0].w} height={c.fotos[0].h} loading="lazy" class="aspect-[4/3] w-full object-cover" />
-            )}
-            {c.fotos.length === 2 && (
-              <div class="grid grid-cols-2 gap-2">
-                {c.fotos.map((f) => (
-                  <img src={f.src} alt={f.alt} width={f.w} height={f.h} loading="lazy" class="aspect-[3/4] w-full object-cover" />
-                ))}
-              </div>
-            )}
-            {c.fotos.length === 3 && (
-              <div class="grid grid-cols-2 gap-2">
-                <img src={c.fotos[0].src} alt={c.fotos[0].alt} width={c.fotos[0].w} height={c.fotos[0].h} loading="lazy" class="col-span-2 aspect-[16/9] w-full object-cover" />
-                {c.fotos.slice(1).map((f) => (
-                  <img src={f.src} alt={f.alt} width={f.w} height={f.h} loading="lazy" class="aspect-square w-full object-cover" />
-                ))}
-              </div>
-            )}
-            <p class="mt-5 text-sm font-semibold text-am2-red">
-              {String(i + 1).padStart(2, '0')} · {c.cliente}
-            </p>
-            <h3 class="mt-1 text-xl font-extrabold leading-tight">{c.titulo}</h3>
-            {c.local && <p class="mt-1 text-sm text-white/60">{c.local}</p>}
-            <p class="mt-3 leading-relaxed text-white/80">{c.texto}</p>
-          </article>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <div class="mx-auto max-w-md px-6">
-    {categorias.map((c) => (
-      <section id={c.id} class="scroll-mt-16 pt-20" aria-labelledby={`titulo-${c.id}`}>
-        {c.foto && (
-          <img src={c.foto} alt={c.fotoAlt ?? c.titulo} loading="lazy" class="mb-6 aspect-[16/10] w-full object-cover" />
-        )}
-        <p class={`${rotulo} text-am2-red`}>Equipamentos</p>
-        <h2 id={`titulo-${c.id}`} class="mt-2 text-[1.75rem] font-extrabold leading-tight tracking-tight">{c.titulo}</h2>
-        <p class="mt-2 leading-relaxed text-am2-ink/75">{c.resumo}</p>
-
-        <ul class="mt-6 border-t border-am2-ink/15">
-          {c.itens.map((item) => (
-            <li class="border-b border-am2-ink/15">
-              <details class="group">
-                <summary class="flex min-h-16 cursor-pointer list-none items-center gap-4 py-2 font-semibold [&::-webkit-details-marker]:hidden">
-                  <span class="grid size-14 shrink-0 place-items-center overflow-hidden bg-white p-1.5 has-[img[src*=case-]]:p-0 has-[img[src*=obra-]]:p-0">
-                    {item.foto ? (
-                      <img src={item.foto} alt="" loading="lazy" class:list={['h-full w-full', /\/(case|obra)-/.test(item.foto) ? 'object-cover' : 'object-contain']} />
-                    ) : (
-                      <span class="text-[0.6rem] leading-tight text-am2-ink/40">[FOTO]</span>
-                    )}
-                  </span>
-                  <span class="flex-1 leading-snug">{item.nome}</span>
-                  <Plus size={18} class="shrink-0 text-am2-red transition-transform group-open:rotate-45" aria-hidden="true" />
-                </summary>
-                <div class="pb-5 pl-[4.5rem]">
-                  <p class="text-[0.95rem] leading-relaxed text-am2-ink/80">{item.descricao}</p>
-                  <a
-                    href={whatsapp(`Olá! Vim pelo portfólio e quero um orçamento de: ${item.nome}.`)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-am2-red underline underline-offset-4 hover:text-am2-red-dark"
-                  >
-                    <MessageCircle size={16} aria-hidden="true" /> Pedir orçamento deste item
-                  </a>
-                </div>
-              </details>
-            </li>
+  <header class="sticky top-0 z-30 border-b border-white/10 bg-am2-ink/95 text-white backdrop-blur">
+    <div class={`${container} flex h-16 items-center justify-between gap-6`}>
+      <a href="#topo" aria-label="AM2 Locações, voltar ao topo">
+        <img src={url('/img/logo-am2.webp')} alt="AM2 Locações" width="640" height="160" class="h-auto w-28 lg:w-32" />
+      </a>
+      <nav aria-label="Seções" class="hidden lg:block">
+        <ul class="flex gap-8 text-sm font-semibold text-white/75">
+          {menu.map(([id, nome]) => (
+            <li><a href={`#${id}`} class="hover:text-white">{nome}</a></li>
           ))}
         </ul>
-      </section>
-    ))}
-
-    <section id="contato" class="scroll-mt-16 pt-20" aria-labelledby="titulo-contato">
-      <p class={`${rotulo} text-am2-red`}>Contato</p>
-      <h2 id="titulo-contato" class="mt-2 text-[1.75rem] font-extrabold leading-tight tracking-tight">Fale com quem entende</h2>
-      <div class="mt-6 grid grid-cols-2 gap-4">
-        {diretores.map((d) => (
-          <figure>
-            <div class="aspect-[4/5] overflow-hidden bg-am2-line">
-              <img src={d.foto} alt={d.nome} loading="lazy" class="h-full w-full object-cover object-top" />
-            </div>
-            <figcaption class="mt-3">
-              <span class="block font-bold leading-tight">{d.nome}</span>
-              <span class="block text-sm text-am2-ink/60">{d.cargo}</span>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-
+      </nav>
       <a
         href={whatsappPadrao}
         target="_blank"
         rel="noopener noreferrer"
-        class="mt-8 flex min-h-16 items-center justify-between gap-4 bg-am2-red px-6 py-4 text-white transition-colors hover:bg-am2-red-dark focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-ink"
+        class="inline-flex min-h-10 items-center gap-2 bg-am2-red px-4 text-sm font-bold transition-colors hover:bg-am2-red-dark"
       >
-        <span>
-          <span class="block text-lg font-bold leading-tight">Pedir orçamento</span>
-          <span class="block text-sm text-white/85">Fale com a gente no WhatsApp</span>
-        </span>
-        <MessageCircle size={28} aria-hidden="true" />
+        <MessageCircle size={16} aria-hidden="true" /> Orçamento
       </a>
-      <a href="tel:+551935045358" class="mt-3 flex min-h-14 items-center justify-between gap-4 border border-am2-ink/25 px-6 font-semibold hover:border-am2-ink">
-        (19) 3504-5358
-        <Phone size={20} class="text-am2-red" aria-hidden="true" />
-      </a>
-
-      <ul class="mt-10 space-y-4 text-[0.95rem]">
-        {unidades.map((u) => (
-          <li>
-            <a href={googleMaps(u.endereco)} target="_blank" rel="noopener noreferrer" class="flex gap-3 hover:underline">
-              <MapPin size={20} class="mt-0.5 shrink-0 text-am2-red" aria-hidden="true" />
-              <span>
-                <b>Unidade {u.cidade}</b><br />
-                <span class="text-am2-ink/65">{u.rua} · {u.bairro}</span>
-              </span>
-            </a>
-          </li>
+    </div>
+    <nav aria-label="Seções" class="border-t border-white/10 lg:hidden">
+      <ul class="flex gap-6 overflow-x-auto px-6 py-2.5 text-sm font-semibold text-white/75">
+        {menu.map(([id, nome]) => (
+          <li class="shrink-0"><a href={`#${id}`} class="inline-flex min-h-8 items-center hover:text-white">{nome}</a></li>
         ))}
       </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="topo" class="relative isolate overflow-hidden bg-am2-ink text-white">
+      <img
+        src={url('/img/portfolio/capa.webp')}
+        alt=""
+        width="1200"
+        height="1600"
+        fetchpriority="high"
+        class="absolute inset-0 -z-10 h-full w-full object-cover object-[50%_30%] opacity-50 lg:left-auto lg:w-[58%] lg:opacity-100"
+      />
+      <div class="absolute inset-0 -z-10 bg-gradient-to-t from-am2-ink via-am2-ink/70 to-am2-ink/20 lg:bg-gradient-to-r lg:from-am2-ink lg:from-45% lg:via-am2-ink/80 lg:via-55% lg:to-transparent" aria-hidden="true"></div>
+      <div aria-hidden="true" class="absolute bottom-0 left-[38%] -z-10 hidden h-40 gap-3 lg:flex">
+        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
+        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
+        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red/40"></span>
+      </div>
+      <div class={`${container} flex min-h-[78svh] flex-col justify-end pb-16 pt-32 lg:min-h-[86vh] lg:justify-center lg:pb-24`}>
+        <div class="max-w-xl">
+          <p class={`${rotulo} text-am2-red`}>Portfólio AM2 Locações</p>
+          <h1 class="mt-3 text-[2.75rem] font-extrabold leading-[1] tracking-tight lg:text-7xl">
+            Tudo para a<br />sua obra.
+          </h1>
+          <p class="mt-5 max-w-md text-lg leading-relaxed text-white/80">
+            Andaimes, escoras e equipamentos para obras de pequeno, médio e grande porte. Entrega e retirada no prazo.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={whatsappPadrao}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex min-h-14 items-center justify-between gap-6 bg-am2-red px-6 font-bold transition-colors hover:bg-am2-red-dark sm:justify-center"
+            >
+              Pedir orçamento <MessageCircle size={22} aria-hidden="true" />
+            </a>
+            <a
+              href="#equipamentos"
+              class="flex min-h-14 items-center justify-between gap-6 border border-white/40 px-6 font-semibold transition-colors hover:border-white sm:justify-center"
+            >
+              Ver equipamentos <ArrowDown size={20} aria-hidden="true" />
+            </a>
+          </div>
+          <p class="mt-8 flex items-center gap-2 text-sm text-white/65">
+            <MapPin size={16} class="text-am2-red" aria-hidden="true" />
+            Unidades em {unidades.map((u) => u.cidade).join(' e ')} - SP
+          </p>
+        </div>
+      </div>
     </section>
-  </div>
+
+    <section id="sobre" class="scroll-mt-28 py-20 lg:scroll-mt-16 lg:py-32" aria-labelledby="titulo-sobre">
+      <div class={`${container} grid gap-12 lg:grid-cols-12 lg:gap-16`}>
+        <div class="lg:col-span-5">
+          <p class={`${rotulo} text-am2-red`}>Quem somos</p>
+          <h2 id="titulo-sobre" class="mt-3 text-[2rem] font-extrabold leading-[1.05] tracking-tight lg:text-5xl">
+            Equipamento certo, no prazo, sem dor de cabeça.
+          </h2>
+          <p class="mt-6 text-lg leading-relaxed text-am2-ink/80">
+            A AM2 é especializada em locação de equipamentos para construção civil. Soluções inteligentes e econômicas
+            para quem vai reformar ou construir.
+          </p>
+          <p class="mt-4 text-lg font-semibold leading-relaxed">
+            Você cuida da obra. A logística dos equipamentos fica com a gente.
+          </p>
+        </div>
+        <ul class="grid gap-px self-start border border-am2-line bg-am2-line sm:grid-cols-2 lg:col-span-7">
+          {diferenciais.map(({ icon: Icon, titulo, texto }) => (
+            <li class="bg-white p-6 lg:p-8">
+              <Icon size={26} strokeWidth={1.75} class="text-am2-red" aria-hidden="true" />
+              <h3 class="mt-5 text-lg font-bold">{titulo}</h3>
+              <p class="mt-2 leading-relaxed text-am2-ink/70">{texto}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="border-y border-am2-line bg-white py-14 lg:py-20" aria-labelledby="titulo-clientes">
+      <div class={container}>
+        <h2 id="titulo-clientes" class={`${rotulo} text-center text-am2-ink/60`}>Quem confia na AM2</h2>
+        <ul class="mt-10 grid grid-cols-3 items-center gap-x-6 gap-y-8 sm:grid-cols-4 lg:grid-cols-6 lg:gap-x-12">
+          {clientes.map((c) => (
+            <li class="h-14 lg:h-16">
+              <img src={c.logo} alt={c.nome} loading="lazy" class="h-full w-full object-contain" />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section id="obras" class="scroll-mt-28 bg-am2-ink py-20 text-white lg:scroll-mt-16 lg:py-32" aria-labelledby="titulo-obras">
+      <div class={container}>
+        <div class="max-w-2xl">
+          <p class={`${rotulo} text-am2-red`}>Cases de sucesso</p>
+          <h2 id="titulo-obras" class="mt-3 text-[2rem] font-extrabold leading-[1.05] tracking-tight lg:text-5xl">Obras que atendemos</h2>
+        </div>
+
+        <div class="mt-14 space-y-20 lg:mt-20 lg:space-y-32">
+          {cases.map((c, i) => (
+            <article class="grid items-center gap-8 lg:grid-cols-12 lg:gap-16">
+              <div class:list={['lg:col-span-7', i % 2 === 1 && 'lg:order-2']}>
+                {c.fotos.length === 1 && (
+                  <img src={c.fotos[0].src} alt={c.fotos[0].alt} width={c.fotos[0].w} height={c.fotos[0].h} loading="lazy" class="aspect-[4/3] w-full object-cover" />
+                )}
+                {c.fotos.length === 2 && (
+                  <div class="grid grid-cols-2 gap-3">
+                    {c.fotos.map((f) => (
+                      <img src={f.src} alt={f.alt} width={f.w} height={f.h} loading="lazy" class="aspect-[3/4] w-full object-cover" />
+                    ))}
+                  </div>
+                )}
+                {c.fotos.length === 3 && (
+                  <div class="grid grid-cols-2 gap-3">
+                    <img src={c.fotos[0].src} alt={c.fotos[0].alt} width={c.fotos[0].w} height={c.fotos[0].h} loading="lazy" class="col-span-2 aspect-[16/9] w-full object-cover" />
+                    {c.fotos.slice(1).map((f) => (
+                      <img src={f.src} alt={f.alt} width={f.w} height={f.h} loading="lazy" class="aspect-square w-full object-cover" />
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div class:list={['lg:col-span-5', i % 2 === 1 && 'lg:order-1']}>
+                <p class="text-5xl font-extrabold text-am2-red lg:text-7xl">{String(i + 1).padStart(2, '0')}</p>
+                <p class="mt-4 text-sm font-semibold uppercase tracking-[0.12em] text-white/60">{c.cliente}</p>
+                <h3 class="mt-1 text-2xl font-extrabold leading-tight lg:text-3xl">{c.titulo}</h3>
+                {c.local && <p class="mt-1 text-white/60">{c.local}</p>}
+                <p class="mt-4 text-lg leading-relaxed text-white/80">{c.texto}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="equipamentos" class="scroll-mt-28 pt-20 lg:scroll-mt-16 lg:pt-32" aria-labelledby="titulo-equipamentos">
+      <div class={container}>
+        <div class="max-w-2xl">
+          <p class={`${rotulo} text-am2-red`}>Equipamentos</p>
+          <h2 id="titulo-equipamentos" class="mt-3 text-[2rem] font-extrabold leading-[1.05] tracking-tight lg:text-5xl">
+            O que você precisa, pronto para a obra.
+          </h2>
+        </div>
+      </div>
+
+      {categorias.map((c) => (
+        <div id={c.id} class="scroll-mt-28 pt-16 lg:scroll-mt-16 lg:pt-24" aria-labelledby={`titulo-${c.id}`} role="region">
+          <div class={`${container} grid gap-10 lg:grid-cols-12 lg:gap-16`}>
+            <div class="lg:col-span-4">
+              <div class="lg:sticky lg:top-24">
+                {c.foto && (
+                  <img src={c.foto} alt={c.fotoAlt ?? c.titulo} loading="lazy" class="mb-6 aspect-[16/10] w-full object-cover" />
+                )}
+                <h3 id={`titulo-${c.id}`} class="text-[1.75rem] font-extrabold leading-tight tracking-tight lg:text-4xl">{c.titulo}</h3>
+                <p class="mt-3 leading-relaxed text-am2-ink/75">{c.resumo}</p>
+                <p class="mt-4 text-sm font-semibold text-am2-ink/50">{c.itens.length} itens</p>
+              </div>
+            </div>
+
+            <ul class="border-t border-am2-ink/15 lg:hidden">
+              {c.itens.map((item) => (
+                <li class="border-b border-am2-ink/15">
+                  <details class="group">
+                    <summary class="flex min-h-16 cursor-pointer list-none items-center gap-4 py-2 font-semibold [&::-webkit-details-marker]:hidden">
+                      <span class:list={['grid size-14 shrink-0 place-items-center overflow-hidden bg-white', !(item.foto && ehFoto(item.foto)) && 'p-1.5']}>
+                        {item.foto && (
+                          <img src={item.foto} alt="" loading="lazy" class:list={['h-full w-full', ehFoto(item.foto) ? 'object-cover' : 'object-contain']} />
+                        )}
+                      </span>
+                      <span class="flex-1 leading-snug">{item.nome}</span>
+                      <Plus size={18} class="shrink-0 text-am2-red transition-transform group-open:rotate-45" aria-hidden="true" />
+                    </summary>
+                    <div class="pb-5 pl-[4.5rem]">
+                      <p class="text-[0.95rem] leading-relaxed text-am2-ink/80">{item.descricao}</p>
+                      <a href={orcamento(item.nome)} target="_blank" rel="noopener noreferrer" class="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-am2-red underline underline-offset-4 hover:text-am2-red-dark">
+                        <MessageCircle size={16} aria-hidden="true" /> Pedir orçamento deste item
+                      </a>
+                    </div>
+                  </details>
+                </li>
+              ))}
+            </ul>
+
+            <ul class="hidden self-start border-l border-t border-am2-line lg:col-span-8 lg:grid lg:grid-cols-2 xl:grid-cols-3">
+              {c.itens.map((item) => (
+                <li class="group flex flex-col border-b border-r border-am2-line bg-white p-6">
+                  <div class:list={['grid aspect-[4/3] place-items-center overflow-hidden', item.foto && ehFoto(item.foto) ? '' : 'p-4']}>
+                    {item.foto && (
+                      <img src={item.foto} alt={item.nome} loading="lazy" class:list={['h-full w-full', ehFoto(item.foto) ? 'object-cover' : 'object-contain transition-transform duration-300 group-hover:scale-105']} />
+                    )}
+                  </div>
+                  <h4 class="mt-5 font-bold leading-snug">{item.nome}</h4>
+                  <p class="mt-2 flex-1 text-sm leading-relaxed text-am2-ink/70">{item.descricao}</p>
+                  <a href={orcamento(item.nome)} target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-2 text-sm font-bold text-am2-red hover:text-am2-red-dark">
+                    <MessageCircle size={16} aria-hidden="true" /> Pedir orçamento
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <section id="contato" class="mt-20 scroll-mt-28 bg-white py-20 lg:mt-32 lg:scroll-mt-16 lg:py-32" aria-labelledby="titulo-contato">
+      <div class={`${container} grid gap-14 lg:grid-cols-12 lg:gap-16`}>
+        <div class="lg:col-span-6">
+          <p class={`${rotulo} text-am2-red`}>Contato</p>
+          <h2 id="titulo-contato" class="mt-3 text-[2rem] font-extrabold leading-[1.05] tracking-tight lg:text-5xl">Fale com quem entende</h2>
+          <div class="mt-10 grid grid-cols-2 gap-4 lg:gap-6">
+            {diretores.map((d) => (
+              <figure>
+                <div class="aspect-[4/5] overflow-hidden bg-am2-paper">
+                  <img src={d.foto} alt={d.nome} loading="lazy" class="h-full w-full object-cover object-top" />
+                </div>
+                <figcaption class="mt-3">
+                  <span class="block font-bold leading-tight">{d.nome}</span>
+                  <span class="block text-sm text-am2-ink/60">{d.cargo}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 lg:col-start-8 lg:self-end">
+          <a
+            href={whatsappPadrao}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex min-h-20 items-center justify-between gap-4 bg-am2-red px-6 py-5 text-white transition-colors hover:bg-am2-red-dark"
+          >
+            <span>
+              <span class="block text-xl font-bold leading-tight">Pedir orçamento</span>
+              <span class="block text-sm text-white/85">Fale com a gente no WhatsApp</span>
+            </span>
+            <MessageCircle size={30} aria-hidden="true" />
+          </a>
+          <a href="tel:+551935045358" class="mt-3 flex min-h-14 items-center justify-between gap-4 border border-am2-ink/25 px-6 font-semibold hover:border-am2-ink">
+            (19) 3504-5358
+            <Phone size={20} class="text-am2-red" aria-hidden="true" />
+          </a>
+
+          <ul class="mt-10 grid gap-6 sm:grid-cols-2">
+            {unidades.map((u) => (
+              <li>
+                <a href={googleMaps(u.endereco)} target="_blank" rel="noopener noreferrer" class="flex gap-3 hover:underline">
+                  <MapPin size={20} class="mt-0.5 shrink-0 text-am2-red" aria-hidden="true" />
+                  <span>
+                    <b>Unidade {u.cidade}</b><br />
+                    <span class="text-sm text-am2-ink/65">{u.rua} · {u.bairro}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="mx-auto max-w-md px-6 pb-10 pt-16 text-xs leading-relaxed text-am2-ink/55">
-    AM2 Locações de Equipamentos Ltda<br />
-    © {new Date().getFullYear()} · <a href="https://am2loca.com.br" class="underline">am2loca.com.br</a>
+  <footer class="bg-am2-ink py-10 text-white/60">
+    <div class={`${container} flex flex-col gap-6 text-sm sm:flex-row sm:items-center sm:justify-between`}>
+      <img src={url('/img/logo-am2.webp')} alt="AM2 Locações" width="640" height="160" loading="lazy" class="h-auto w-28" />
+      <p>
+        AM2 Locações de Equipamentos Ltda · © {new Date().getFullYear()} ·
+        <a href="https://am2loca.com.br" target="_blank" rel="noopener noreferrer" class="underline hover:text-white">am2loca.com.br</a>
+      </p>
+    </div>
   </footer>
 </Base>
