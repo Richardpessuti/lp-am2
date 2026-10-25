@@ -1,12 +1,15 @@
 ---
 import '../styles/global.css';
-import { MessageCircle, LayoutGrid, Globe } from '@lucide/astro';
+import { MessageCircle, LayoutGrid, Globe, MapPin } from '@lucide/astro';
 
 // Troque os [PREENCHER] pelos dados reais antes de publicar.
 const whatsapp = (numero: string, texto: string) =>
   `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
 
 const comercial = whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e quero um orçamento de locação.');
+
+const endereco = '[PREENCHER: endereço completo]';
+const comoChegar = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(endereco)}`;
 
 const links = [
   { titulo: 'Portfólio completo', href: '[PREENCHER]', icon: LayoutGrid },
@@ -65,6 +68,18 @@ const links = [
         <MessageCircle size={28} strokeWidth={2} aria-hidden="true" />
       </a>
 
+      <a
+        href={comoChegar}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-3 flex min-h-16 items-center gap-4 border border-am2-ink bg-am2-ink px-6 py-4 text-white transition-colors hover:bg-am2-ink/90 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+      >
+        <MapPin size={24} strokeWidth={1.75} class="shrink-0 text-am2-red" aria-hidden="true" />
+        <span class="flex-1">
+          <span class="block font-bold leading-tight">Como chegar</span>
+          <span class="block text-sm text-white/70">{endereco}</span>
+        </span>
+      </a>
 
       <section class="mt-14" aria-labelledby="conheca">
         <h2 id="conheca" class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">
