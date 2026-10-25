@@ -1,27 +1,12 @@
 ---
 import '../styles/global.css';
-import { MessageCircle, HardHat, Headset, LayoutGrid, Globe, ArrowUpRight } from '@lucide/astro';
+import { MessageCircle, LayoutGrid, Globe } from '@lucide/astro';
 
 // Troque os [PREENCHER] pelos dados reais antes de publicar.
 const whatsapp = (numero: string, texto: string) =>
   `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
 
 const comercial = whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e quero um orçamento de locação.');
-
-const contatos = [
-  {
-    titulo: 'Atendimento',
-    descricao: 'Dúvidas, entregas e retiradas',
-    href: whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e preciso de atendimento.'),
-    icon: Headset,
-  },
-  {
-    titulo: 'Engenharia & Projetos',
-    descricao: 'Suporte técnico para a sua obra',
-    href: whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e quero falar com a engenharia.'),
-    icon: HardHat,
-  },
-];
 
 const links = [
   { titulo: 'Portfólio completo', href: '[PREENCHER]', icon: LayoutGrid },
@@ -75,35 +60,11 @@ const links = [
       >
         <span>
           <span class="block text-lg font-bold leading-tight">Pedir orçamento</span>
-          <span class="block text-sm text-white/85">Comercial no WhatsApp</span>
+          <span class="block text-sm text-white/85">Fale com a gente no WhatsApp</span>
         </span>
         <MessageCircle size={28} strokeWidth={2} aria-hidden="true" />
       </a>
 
-      <section class="mt-14" aria-labelledby="contatos">
-        <h2 id="contatos" class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">
-          Outros contatos
-        </h2>
-        <ul class="mt-4 divide-y divide-am2-line border-y border-am2-line">
-          {contatos.map(({ titulo, descricao, href, icon: Icon }) => (
-            <li>
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group flex min-h-16 items-center gap-4 py-4 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
-              >
-                <Icon size={24} strokeWidth={1.75} class="shrink-0 text-am2-red" aria-hidden="true" />
-                <span class="flex-1">
-                  <span class="block font-semibold">{titulo}</span>
-                  <span class="block text-sm text-am2-ink/65">{descricao}</span>
-                </span>
-                <ArrowUpRight size={20} class="shrink-0 text-am2-ink/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       <section class="mt-14" aria-labelledby="conheca">
         <h2 id="conheca" class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">
