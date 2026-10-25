@@ -4,10 +4,8 @@ import { MessageCircle, LayoutGrid, Globe, MapPin, Navigation, ChevronRight, X }
 import { unidades, diasSemana, googleMaps, waze, mapaEmbed } from '../data/unidades';
 
 // Troque os [PREENCHER] pelos dados reais antes de publicar.
-const whatsapp = (numero: string, texto: string) =>
-  `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
-
-const comercial = whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e quero um orçamento de locação.');
+const comercial =
+  'https://api.whatsapp.com/send?phone=5519993102020&text=Oi.%20Gostaria%20de%20saber%20mais%20sobre%20o%20trabalho%20de%20voc%C3%AAs';
 
 const links = [
   { titulo: 'Portfólio completo', href: '[PREENCHER]', icon: LayoutGrid },
