@@ -1,6 +1,7 @@
 ---
-import '../styles/global.css';
-import { MessageCircle, LayoutGrid, Globe, MapPin } from '@lucide/astro';
+import Base from '../layouts/Base.astro';
+import { MessageCircle, LayoutGrid, Globe, MapPin, ArrowUpRight } from '@lucide/astro';
+import { unidades } from '../data/unidades';
 
 // Troque os [PREENCHER] pelos dados reais antes de publicar.
 const whatsapp = (numero: string, texto: string) =>
@@ -8,34 +9,16 @@ const whatsapp = (numero: string, texto: string) =>
 
 const comercial = whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e quero um orçamento de locação.');
 
-const rota = (endereco: string) =>
-  `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(endereco)}`;
-
-const unidades = [
-  { cidade: 'Hortolândia', rua: 'R. José Agostinho, 594', endereco: 'R. José Agostinho, 594 - Jardim Santana, Hortolândia - SP, 13184-527' },
-  { cidade: 'Paulínia', rua: 'R. Nações Unidas, 73', endereco: 'R. Nações Unidas, 73 - Vila Bressani, Paulínia - SP, 13140-508' },
-];
-
 const links = [
   { titulo: 'Portfólio completo', href: '[PREENCHER]', icon: LayoutGrid },
   { titulo: 'Site oficial', href: '[PREENCHER]', icon: Globe },
 ];
 ---
 
-<!doctype html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#292a37" />
-    <title>AM2 Locações | Equipamentos para construção civil</title>
-    <meta name="description" content="Locação de equipamentos para construção civil. Fale com a AM2 pelo WhatsApp." />
-    <meta property="og:title" content="AM2 Locações" />
-    <meta property="og:description" content="Locação de equipamentos para construção civil." />
-    <meta property="og:image" content="/img/logo-am2.webp" />
-    <link rel="icon" href="/img/favicon.png" type="image/png" />
-  </head>
-  <body class="min-h-dvh bg-am2-paper font-sans text-am2-ink antialiased">
+<Base
+  title="AM2 Locações | Equipamentos para construção civil"
+  description="Locação de equipamentos para construção civil. Fale com a AM2 pelo WhatsApp."
+>
     <header class="relative overflow-hidden bg-am2-ink px-6 pb-14 pt-16 text-white">
       <div aria-hidden="true" class="absolute -right-10 top-0 flex h-full gap-3 opacity-90">
         <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
@@ -73,24 +56,18 @@ const links = [
         <MessageCircle size={28} strokeWidth={2} aria-hidden="true" />
       </a>
 
-      <ul class="mt-3 divide-y divide-am2-ink/15 border border-am2-ink/25" aria-label="Como chegar">
-        {unidades.map(({ cidade, rua, endereco }) => (
-          <li>
-            <a
-              href={rota(endereco)}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex min-h-14 items-center gap-3 px-5 py-3 transition-colors hover:bg-white focus-visible:outline-3 focus-visible:-outline-offset-3 focus-visible:outline-am2-red"
-            >
-              <MapPin size={20} strokeWidth={2} class="shrink-0 text-am2-red" aria-hidden="true" />
-              <span class="min-w-0 flex-1">
-                <span class="block font-semibold leading-tight">Como chegar · {cidade}</span>
-                <span class="block truncate text-sm text-am2-ink/60">{rua}</span>
-              </span>
-            </a>
-          </li>
-        ))}
-      </ul>
+      <a
+        href="/como-chegar"
+        target="_blank"
+        class="group mt-3 flex min-h-14 items-center gap-3 border border-am2-ink/25 px-5 py-3 transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+      >
+        <MapPin size={20} strokeWidth={2} class="shrink-0 text-am2-red" aria-hidden="true" />
+        <span class="min-w-0 flex-1">
+          <span class="block font-semibold leading-tight">Como chegar</span>
+          <span class="block text-sm text-am2-ink/60">{unidades.map((u) => u.cidade).join(' e ')}</span>
+        </span>
+        <ArrowUpRight size={18} class="shrink-0 text-am2-ink/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+      </a>
 
       <section class="mt-14" aria-labelledby="conheca">
         <h2 id="conheca" class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">
@@ -115,5 +92,4 @@ const links = [
     <footer class="mx-auto mt-20 max-w-md px-6 pb-10 text-xs text-am2-ink/55">
       © {new Date().getFullYear()} AM2 Locações
     </footer>
-  </body>
-</html>
+</Base>
