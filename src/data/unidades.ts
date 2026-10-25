@@ -2,6 +2,20 @@
 // Use ['07:00', '17:00'], 'fechado' ou null enquanto não souber ([PREENCHER]).
 export type Horario = [string, string] | 'fechado' | null;
 
+// Vale para as duas unidades. Feriados: fechado.
+const horarioPadrao: Horario[] = [
+  'fechado',
+  ['07:00', '17:00'],
+  ['07:00', '17:00'],
+  ['07:00', '17:00'],
+  ['07:00', '17:00'],
+  ['07:00', '16:00'],
+  'fechado',
+];
+
+// Ordem de exibição: começa na segunda.
+export const ordemDias = [1, 2, 3, 4, 5, 6, 0];
+
 export const diasSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
 
 export const unidades: {
@@ -20,7 +34,7 @@ export const unidades: {
     bairro: 'Jardim Santana',
     cep: '13184-527',
     endereco: 'R. José Agostinho, 594 - Jardim Santana, Hortolândia - SP, 13184-527',
-    horarios: [null, null, null, null, null, null, null],
+    horarios: horarioPadrao,
   },
   {
     id: 'paulinia',
@@ -29,7 +43,7 @@ export const unidades: {
     bairro: 'Vila Bressani',
     cep: '13140-508',
     endereco: 'R. Nações Unidas, 73 - Vila Bressani, Paulínia - SP, 13140-508',
-    horarios: [null, null, null, null, null, null, null],
+    horarios: horarioPadrao,
   },
 ];
 
