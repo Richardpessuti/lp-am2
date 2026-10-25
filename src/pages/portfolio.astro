@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
 import { ArrowLeft, MessageCircle, Plus, Truck, Ruler, ShieldCheck, Wrench, Phone, MapPin } from '@lucide/astro';
 import { categorias, clientes, cases, diretores } from '../data/portfolio';
 import { whatsapp, whatsappPadrao } from '../data/contato';
@@ -21,7 +22,7 @@ const rotulo = 'text-xs font-semibold uppercase tracking-[0.18em]';
 >
   <header class="relative isolate overflow-hidden bg-am2-ink text-white">
     <img
-      src="/img/portfolio/capa.webp"
+      src={url('/img/portfolio/capa.webp')}
       alt=""
       width="1200"
       height="1600"
@@ -30,10 +31,10 @@ const rotulo = 'text-xs font-semibold uppercase tracking-[0.18em]';
     />
     <div class="absolute inset-0 -z-10 bg-gradient-to-t from-am2-ink via-am2-ink/70 to-am2-ink/30" aria-hidden="true"></div>
     <div class="mx-auto max-w-md px-6 pb-14 pt-10">
-      <a href="/" class="-ml-1 inline-flex min-h-11 items-center gap-2 px-1 text-sm text-white/80 hover:text-white">
+      <a href={url('/')} class="-ml-1 inline-flex min-h-11 items-center gap-2 px-1 text-sm text-white/80 hover:text-white">
         <ArrowLeft size={16} aria-hidden="true" /> Início
       </a>
-      <img src="/img/logo-am2.webp" alt="AM2 Locações" width="640" height="160" class="mt-6 h-auto w-40" />
+      <img src={url('/img/logo-am2.webp')} alt="AM2 Locações" width="640" height="160" class="mt-6 h-auto w-40" />
       <p class={`mt-24 ${rotulo} text-am2-red`}>Portfólio</p>
       <h1 class="mt-2 text-[2.5rem] font-extrabold leading-[1.02] tracking-tight">
         Tudo para a<br />sua obra.
@@ -210,7 +211,7 @@ const rotulo = 'text-xs font-semibold uppercase tracking-[0.18em]';
       <ul class="mt-10 space-y-4 text-[0.95rem]">
         {unidades.map((u) => (
           <li>
-            <a href={`/#${u.id}`} class="flex gap-3 hover:underline">
+            <a href={url(`/#${u.id}`)} class="flex gap-3 hover:underline">
               <MapPin size={20} class="mt-0.5 shrink-0 text-am2-red" aria-hidden="true" />
               <span>
                 <b>Unidade {u.cidade}</b><br />

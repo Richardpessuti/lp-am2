@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { url } from '../lib/url';
 
 interface Props {
   title: string;
@@ -18,8 +19,8 @@ const { title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/img/logo-am2.webp" />
-    <link rel="icon" href="/img/favicon.png" type="image/png" />
+    <meta property="og:image" content={new URL(url('/img/logo-am2.webp'), Astro.site).href} />
+    <link rel="icon" href={url('/img/favicon.png')} type="image/png" />
   </head>
   <body class="min-h-dvh bg-am2-paper font-sans text-am2-ink antialiased">
     <slot />

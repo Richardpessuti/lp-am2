@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
 import { MessageCircle, LayoutGrid, Globe, MapPin, Navigation, ChevronRight, X } from '@lucide/astro';
 import { whatsappPadrao } from '../data/contato';
 import { unidades, diasSemana, ordemDias, googleMaps, waze, mapaEmbed } from '../data/unidades';
@@ -7,7 +8,7 @@ import { unidades, diasSemana, ordemDias, googleMaps, waze, mapaEmbed } from '..
 const comercial = whatsappPadrao;
 
 const links = [
-  { titulo: 'Portfólio completo', href: '/portfolio', icon: LayoutGrid },
+  { titulo: 'Portfólio completo', href: url('/portfolio'), icon: LayoutGrid },
   { titulo: 'Site oficial', href: 'https://am2loca.com.br', icon: Globe },
 ];
 
@@ -28,7 +29,7 @@ const hora = (h: string) => {
       <span class="h-full w-5 -skew-x-[24deg] bg-am2-red/40"></span>
     </div>
     <div class="relative mx-auto max-w-md">
-      <img src="/img/logo-am2.webp" alt="AM2 Locações" width="640" height="160" class="h-auto w-48" />
+      <img src={url('/img/logo-am2.webp')} alt="AM2 Locações" width="640" height="160" class="h-auto w-48" />
       <h1 class="mt-10 text-[2.25rem] font-extrabold leading-[1.02] tracking-tight">
         Equipamento certo.<br />Obra no prazo.
       </h1>
