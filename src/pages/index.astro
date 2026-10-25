@@ -39,21 +39,6 @@ const hora = (h: string) => {
         Locação de equipamentos para construção civil.
       </p>
 
-      <ul class="mt-7 flex flex-col gap-2">
-        {unidades.map((u) => (
-          <li>
-            <button
-              type="button"
-              data-abrir={u.id}
-              class="flex min-h-10 w-full items-center gap-2 border border-white/20 bg-am2-ink px-3 text-left text-[0.8rem] transition-colors hover:border-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-            >
-              <span data-dot={u.id} class="size-2 shrink-0 rounded-full bg-white/40" aria-hidden="true"></span>
-              <span class="whitespace-nowrap font-semibold">Unidade {u.cidade}</span>
-              <span data-status={u.id} class="ml-auto truncate text-white/60"></span>
-            </button>
-          </li>
-        ))}
-      </ul>
     </div>
   </header>
 
@@ -188,6 +173,7 @@ const hora = (h: string) => {
               <span class="min-w-0 flex-1">
                 <span class="block font-bold">{u.cidade}</span>
                 <span class="block truncate text-sm text-am2-ink/60">{u.rua}</span>
+                <span class="mt-1 flex items-center gap-1.5 text-xs font-semibold text-am2-ink/70 empty:hidden" data-status={u.id}></span>
               </span>
               <ChevronRight size={18} class="shrink-0 text-am2-ink/40" aria-hidden="true" />
             </button>
@@ -240,10 +226,9 @@ const hora = (h: string) => {
       const s = status(u.horarios);
       if (!s) continue;
       const cor = s.aberta ? 'bg-green-500' : 'bg-am2-red';
-      document.querySelector(`[data-dot="${u.id}"]`).className = `size-2 shrink-0 rounded-full ${cor}`;
-      document.querySelector(`[data-status="${u.id}"]`).textContent = s.texto.replace(/^\S+ · /, '');
-      document.querySelector(`[data-status-card="${u.id}"]`).innerHTML =
-        `<span class="size-2 rounded-full ${cor}"></span>${s.texto}`;
+      const html = `<span class="size-2 shrink-0 rounded-full ${cor}"></span>${s.texto}`;
+      document.querySelector(`[data-status="${u.id}"]`).innerHTML = html;
+      document.querySelector(`[data-status-card="${u.id}"]`).innerHTML = html;
     }
 
     function abrir(id) {
