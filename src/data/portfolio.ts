@@ -88,12 +88,12 @@ export const categorias: Categoria[] = [
           'Torres de painéis e diagonais para obras pesadas: viadutos, pontes e prédios com pé-direito duplo.',
       },
       {
-        nome: 'Viga metálica de escoramento de lajes',
+        nome: 'Viga metálica de escoramento de lajes', foto: '/img/portfolio/case-grdi-1.webp',
         descricao:
           'Chapa de aço galvanizada ou pintada, de alta capacidade de carga. Dispensa caibros, barrotes e contrabarrotes de madeira.',
       },
       {
-        nome: 'Viga metálica de travamento de pilar',
+        nome: 'Viga metálica de travamento de pilar', foto: '/img/portfolio/case-hotel-class.webp',
         descricao:
           'Cintas metálicas, barras de ancoragem e presilhas para alinhar pilares e vigas com menos madeira.',
       },
@@ -116,7 +116,7 @@ export const categorias: Categoria[] = [
         descricao: 'Une as vigas metálicas no topo da escora, na concretagem de lajes e colunas.',
       },
       {
-        nome: 'Cruzeta',
+        nome: 'Cruzeta', foto: '/img/portfolio/escoras.webp',
         descricao:
           'Montada no tubo superior da escora (até 63 mm) para escorar painéis laterais e fundo das fôrmas de vigas. Encaixe que não se solta no transporte.',
       },
@@ -126,17 +126,17 @@ export const categorias: Categoria[] = [
           'Mantém a escora firme na vertical e facilita a montagem das vigas. Fixação rápida por cunha. Para tubos de 40 a 65 mm.',
       },
       {
-        nome: 'Presilha de viga (cachorrinho)',
+        nome: 'Presilha de viga (cachorrinho)', foto: '/img/portfolio/case-residencia-1.webp',
         descricao:
           'Usada com a barra de ancoragem para fechar e travar as fôrmas de viga com mais segurança.',
       },
       {
-        nome: 'Barra de ancoragem com flange (até 1 m)',
+        nome: 'Barra de ancoragem com flange (até 1 m)', foto: '/img/portfolio/obra-andaime.webp',
         descricao:
           'Também chamada de agulha ou tirante. Trava fôrmas de pilares, vigas e muros na concretagem, sem pregos nem sarrafos.',
       },
       {
-        nome: 'Aprumador de pilar',
+        nome: 'Aprumador de pilar', foto: '/img/portfolio/case-grdi-2.webp',
         descricao:
           'Deixa painéis e fôrmas no prumo em muros, paredes e colunas. Regulagem por rosca de 1 1/4" para ajuste rápido e preciso.',
       },
