@@ -1,0 +1,132 @@
+---
+import '../styles/global.css';
+import { MessageCircle, HardHat, Headset, LayoutGrid, Globe, ArrowUpRight } from '@lucide/astro';
+
+// Troque os [PREENCHER] pelos dados reais antes de publicar.
+const whatsapp = (numero: string, texto: string) =>
+  `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+
+const comercial = whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e quero um orçamento de locação.');
+
+const contatos = [
+  {
+    titulo: 'Atendimento',
+    descricao: 'Dúvidas, entregas e retiradas',
+    href: whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e preciso de atendimento.'),
+    icon: Headset,
+  },
+  {
+    titulo: 'Engenharia & Projetos',
+    descricao: 'Suporte técnico para a sua obra',
+    href: whatsapp('55[PREENCHER]', 'Olá! Vim pelo Instagram e quero falar com a engenharia.'),
+    icon: HardHat,
+  },
+];
+
+const links = [
+  { titulo: 'Portfólio completo', href: '[PREENCHER]', icon: LayoutGrid },
+  { titulo: 'Site oficial', href: '[PREENCHER]', icon: Globe },
+];
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#292a37" />
+    <title>AM2 Locações | Equipamentos para construção civil</title>
+    <meta name="description" content="Locação de equipamentos para construção civil. Fale com a AM2 pelo WhatsApp." />
+    <meta property="og:title" content="AM2 Locações" />
+    <meta property="og:description" content="Locação de equipamentos para construção civil." />
+    <meta property="og:image" content="/img/logo-am2.webp" />
+    <link rel="icon" href="/img/logo-am2.webp" type="image/webp" />
+  </head>
+  <body class="min-h-dvh bg-am2-paper font-sans text-am2-ink antialiased">
+    <header class="relative overflow-hidden bg-am2-ink px-6 pb-14 pt-16 text-white">
+      <div aria-hidden="true" class="absolute -right-10 top-0 flex h-full gap-3 opacity-90">
+        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
+        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
+        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red/40"></span>
+      </div>
+      <div class="relative mx-auto max-w-md">
+        <img
+          src="/img/logo-am2.webp"
+          alt="AM2 Locações"
+          width="220"
+          height="74"
+          class="h-auto w-44"
+        />
+        <h1 class="mt-10 text-[2.25rem] font-extrabold leading-[1.02] tracking-tight">
+          Equipamento certo.<br />Obra no prazo.
+        </h1>
+        <p class="mt-4 max-w-[15rem] text-base leading-relaxed text-white/75">
+          Locação de equipamentos para construção civil.
+        </p>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-md px-6">
+      <a
+        href={comercial}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="relative z-10 -mt-7 flex min-h-16 items-center justify-between gap-4 bg-am2-red px-6 py-5 text-white transition-colors hover:bg-am2-red-dark focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-ink"
+      >
+        <span>
+          <span class="block text-lg font-bold leading-tight">Pedir orçamento</span>
+          <span class="block text-sm text-white/85">Comercial no WhatsApp</span>
+        </span>
+        <MessageCircle size={28} strokeWidth={2} aria-hidden="true" />
+      </a>
+
+      <section class="mt-14" aria-labelledby="contatos">
+        <h2 id="contatos" class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">
+          Outros contatos
+        </h2>
+        <ul class="mt-4 divide-y divide-am2-line border-y border-am2-line">
+          {contatos.map(({ titulo, descricao, href, icon: Icon }) => (
+            <li>
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group flex min-h-16 items-center gap-4 py-4 focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+              >
+                <Icon size={24} strokeWidth={1.75} class="shrink-0 text-am2-red" aria-hidden="true" />
+                <span class="flex-1">
+                  <span class="block font-semibold">{titulo}</span>
+                  <span class="block text-sm text-am2-ink/65">{descricao}</span>
+                </span>
+                <ArrowUpRight size={20} class="shrink-0 text-am2-ink/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="mt-14" aria-labelledby="conheca">
+        <h2 id="conheca" class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">
+          Conheça a AM2
+        </h2>
+        <div class="mt-4 grid grid-cols-2 gap-3">
+          {links.map(({ titulo, href, icon: Icon }) => (
+            <a
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex min-h-28 flex-col justify-between border border-am2-ink/15 bg-white p-4 transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+            >
+              <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
+              <span class="text-sm font-semibold leading-snug">{titulo}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <footer class="mx-auto mt-20 max-w-md px-6 pb-10 text-xs text-am2-ink/55">
+      © {new Date().getFullYear()} AM2 Locações
+    </footer>
+  </body>
+</html>
