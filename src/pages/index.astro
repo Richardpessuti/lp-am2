@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import { MessageCircle, LayoutGrid, Globe, MapPin, ArrowUpRight } from '@lucide/astro';
-import { unidades } from '../data/unidades';
+import { MessageCircle, LayoutGrid, Globe, MapPin, Navigation, ChevronRight, X } from '@lucide/astro';
+import { unidades, diasSemana, googleMaps, waze, mapaEmbed } from '../data/unidades';
 
 // Troque os [PREENCHER] pelos dados reais antes de publicar.
 const whatsapp = (numero: string, texto: string) =>
@@ -13,83 +13,262 @@ const links = [
   { titulo: 'Portfólio completo', href: '[PREENCHER]', icon: LayoutGrid },
   { titulo: 'Site oficial', href: '[PREENCHER]', icon: Globe },
 ];
+
+const hora = (h: string) => {
+  const [hh, mm] = h.split(':');
+  return `${Number(hh)}h${mm === '00' ? '' : mm}`;
+};
 ---
 
 <Base
   title="AM2 Locações | Equipamentos para construção civil"
-  description="Locação de equipamentos para construção civil. Fale com a AM2 pelo WhatsApp."
+  description="Locação de equipamentos para construção civil em Hortolândia e Paulínia. Fale com a AM2 pelo WhatsApp."
 >
-    <header class="relative overflow-hidden bg-am2-ink px-6 pb-14 pt-16 text-white">
-      <div aria-hidden="true" class="absolute -right-10 top-0 flex h-full gap-3 opacity-90">
-        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
-        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
-        <span class="h-full w-5 -skew-x-[24deg] bg-am2-red/40"></span>
-      </div>
-      <div class="relative mx-auto max-w-md">
-        <img
-          src="/img/logo-am2.webp"
-          alt="AM2 Locações"
-          width="640"
-          height="160"
-          class="h-auto w-48"
-        />
-        <h1 class="mt-10 text-[2.25rem] font-extrabold leading-[1.02] tracking-tight">
-          Equipamento certo.<br />Obra no prazo.
-        </h1>
-        <p class="mt-4 max-w-[15rem] text-base leading-relaxed text-white/75">
-          Locação de equipamentos para construção civil.
-        </p>
-      </div>
-    </header>
+  <header class="relative overflow-hidden bg-am2-ink px-6 pb-14 pt-16 text-white">
+    <div aria-hidden="true" class="absolute -right-10 top-0 flex h-full gap-3 opacity-90">
+      <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
+      <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
+      <span class="h-full w-5 -skew-x-[24deg] bg-am2-red/40"></span>
+    </div>
+    <div class="relative mx-auto max-w-md">
+      <img src="/img/logo-am2.webp" alt="AM2 Locações" width="640" height="160" class="h-auto w-48" />
+      <h1 class="mt-10 text-[2.25rem] font-extrabold leading-[1.02] tracking-tight">
+        Equipamento certo.<br />Obra no prazo.
+      </h1>
+      <p class="mt-4 max-w-[15rem] text-base leading-relaxed text-white/75">
+        Locação de equipamentos para construção civil.
+      </p>
 
-    <main class="mx-auto max-w-md px-6">
-      <a
-        href={comercial}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="relative z-10 -mt-7 flex min-h-16 items-center justify-between gap-4 bg-am2-red px-6 py-5 text-white transition-colors hover:bg-am2-red-dark focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-ink"
-      >
-        <span>
-          <span class="block text-lg font-bold leading-tight">Pedir orçamento</span>
-          <span class="block text-sm text-white/85">Fale com a gente no WhatsApp</span>
-        </span>
-        <MessageCircle size={28} strokeWidth={2} aria-hidden="true" />
-      </a>
-
-      <a
-        href="/como-chegar"
-        target="_blank"
-        class="group mt-3 flex min-h-14 items-center gap-3 border border-am2-ink/25 px-5 py-3 transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
-      >
-        <MapPin size={20} strokeWidth={2} class="shrink-0 text-am2-red" aria-hidden="true" />
-        <span class="min-w-0 flex-1">
-          <span class="block font-semibold leading-tight">Como chegar</span>
-          <span class="block text-sm text-am2-ink/60">{unidades.map((u) => u.cidade).join(' e ')}</span>
-        </span>
-        <ArrowUpRight size={18} class="shrink-0 text-am2-ink/40 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden="true" />
-      </a>
-
-      <section class="mt-14" aria-labelledby="conheca">
-        <h2 id="conheca" class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">
-          Conheça a AM2
-        </h2>
-        <div class="mt-4 grid grid-cols-2 gap-3">
-          {links.map(({ titulo, href, icon: Icon }) => (
-            <a
-              href={href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="flex min-h-28 flex-col justify-between border border-am2-ink/15 bg-white p-4 transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+      <ul class="mt-7 flex flex-col gap-2">
+        {unidades.map((u) => (
+          <li>
+            <button
+              type="button"
+              data-abrir={u.id}
+              class="flex min-h-10 w-full items-center gap-2 border border-white/20 bg-am2-ink px-3 text-left text-[0.8rem] transition-colors hover:border-white/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
-              <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
-              <span class="text-sm font-semibold leading-snug">{titulo}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    </main>
+              <span data-dot={u.id} class="size-2 shrink-0 rounded-full bg-white/40" aria-hidden="true"></span>
+              <span class="whitespace-nowrap font-semibold">Unidade {u.cidade}</span>
+              <span data-status={u.id} class="ml-auto truncate text-white/60"></span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </header>
 
-    <footer class="mx-auto mt-20 max-w-md px-6 pb-10 text-xs text-am2-ink/55">
-      © {new Date().getFullYear()} AM2 Locações
-    </footer>
+  <main class="mx-auto max-w-md px-6">
+    <a
+      href={comercial}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="relative z-10 -mt-7 flex min-h-16 items-center justify-between gap-4 bg-am2-red px-6 py-5 text-white transition-colors hover:bg-am2-red-dark focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-ink"
+    >
+      <span>
+        <span class="block text-lg font-bold leading-tight">Pedir orçamento</span>
+        <span class="block text-sm text-white/85">Fale com a gente no WhatsApp</span>
+      </span>
+      <MessageCircle size={28} strokeWidth={2} aria-hidden="true" />
+    </a>
+
+    <button
+      type="button"
+      id="abrir-unidades"
+      class="mt-3 flex min-h-14 w-full items-center justify-center gap-2 border border-am2-ink/25 px-5 py-3 font-semibold transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+    >
+      <MapPin size={20} strokeWidth={2} class="shrink-0 text-am2-red" aria-hidden="true" />
+      Como chegar
+    </button>
+
+    {unidades.map((u) => (
+      <section id={u.id} data-unidade hidden class="mt-10 scroll-mt-6 border-t-4 border-am2-red bg-white px-5 pb-6 pt-6" aria-labelledby={`titulo-${u.id}`}>
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-red">Unidade</p>
+            <h2 id={`titulo-${u.id}`} class="mt-1 text-2xl font-extrabold tracking-tight">{u.cidade}</h2>
+          </div>
+          <button type="button" data-fechar class="-mr-2 grid size-11 place-items-center text-am2-ink/50 hover:text-am2-ink" aria-label="Fechar unidade">
+            <X size={20} aria-hidden="true" />
+          </button>
+        </div>
+        <p data-status-card={u.id} class="mt-2 flex items-center gap-2 text-sm font-semibold empty:hidden"></p>
+
+        <p class="mt-4 leading-snug">
+          <b>{u.rua}</b><br />
+          <span class="text-am2-ink/65">{u.bairro} · {u.cidade} - SP · <span class="whitespace-nowrap">{u.cep}</span></span>
+        </p>
+
+        <div class="mt-5 grid grid-cols-2 gap-3">
+          <a
+            href={googleMaps(u.endereco)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex min-h-12 items-center justify-center gap-2 whitespace-nowrap bg-am2-red px-3 text-sm font-semibold text-white transition-colors hover:bg-am2-red-dark focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-ink"
+          >
+            <Navigation size={16} aria-hidden="true" /> Google Maps
+          </a>
+          <a
+            href={waze(u.endereco)}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex min-h-12 items-center justify-center gap-2 border border-am2-ink/25 px-4 text-sm font-semibold transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+          >
+            <Navigation size={16} aria-hidden="true" /> Waze
+          </a>
+        </div>
+
+        <div class="mt-5 aspect-[4/3] w-full overflow-hidden border border-am2-ink/15 bg-am2-line">
+          <iframe
+            data-src={mapaEmbed(u.endereco)}
+            title={`Mapa da unidade ${u.cidade}`}
+            referrerpolicy="no-referrer-when-downgrade"
+            class="h-full w-full border-0"
+          ></iframe>
+        </div>
+
+        <h3 class="mt-8 text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">Horários</h3>
+        <dl class="mt-3 divide-y divide-am2-line text-[0.95rem]">
+          {u.horarios.map((h, dia) => (
+            <div data-dia={dia} class="flex justify-between py-2.5 data-[hoje]:font-bold data-[hoje]:text-am2-red">
+              <dt>{diasSemana[dia]}<span class="hoje-label hidden"> · hoje</span></dt>
+              <dd class={h === null ? 'text-am2-ink/50' : ''}>
+                {h === null ? '[PREENCHER]' : h === 'fechado' ? 'Fechado' : `${hora(h[0])} às ${hora(h[1])}`}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        <p class="mt-5 border-l-4 border-am2-red bg-am2-paper px-4 py-3 text-sm leading-relaxed text-am2-ink/80">
+          <b class="text-am2-red">Feriados:</b> o horário pode mudar. Confirme antes pelo
+          <a href={comercial} target="_blank" rel="noopener noreferrer" class="font-semibold text-am2-red underline underline-offset-2">WhatsApp</a>.
+        </p>
+      </section>
+    ))}
+
+    <section class="mt-14" aria-labelledby="conheca">
+      <h2 id="conheca" class="text-xs font-semibold uppercase tracking-[0.18em] text-am2-ink/60">
+        Conheça a AM2
+      </h2>
+      <div class="mt-4 grid grid-cols-2 gap-3">
+        {links.map(({ titulo, href, icon: Icon }) => (
+          <a
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex min-h-28 flex-col justify-between border border-am2-ink/15 bg-white p-4 transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+          >
+            <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
+            <span class="text-sm font-semibold leading-snug">{titulo}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <footer class="mx-auto mt-20 max-w-md px-6 pb-10 text-xs text-am2-ink/55">
+    © {new Date().getFullYear()} AM2 Locações
+  </footer>
+
+  <dialog
+    id="gaveta"
+    aria-labelledby="gaveta-titulo"
+    class="fixed inset-x-0 bottom-0 top-auto m-0 w-full max-w-full bg-am2-paper p-0 text-am2-ink backdrop:bg-am2-ink/60"
+  >
+    <div class="mx-auto max-w-md px-6 pb-8 pt-7">
+      <h2 id="gaveta-titulo" class="text-xl font-extrabold tracking-tight">Qual unidade?</h2>
+      <p class="mt-1 text-sm text-am2-ink/65">Veja endereço, horários e como chegar.</p>
+      <ul class="mt-5 space-y-3">
+        {unidades.map((u) => (
+          <li>
+            <button
+              type="button"
+              data-abrir={u.id}
+              class="flex min-h-16 w-full items-center gap-4 border border-am2-ink/15 bg-white px-5 py-3 text-left transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
+            >
+              <MapPin size={22} strokeWidth={2} class="shrink-0 text-am2-red" aria-hidden="true" />
+              <span class="min-w-0 flex-1">
+                <span class="block font-bold">{u.cidade}</span>
+                <span class="block truncate text-sm text-am2-ink/60">{u.rua}</span>
+              </span>
+              <ChevronRight size={18} class="shrink-0 text-am2-ink/40" aria-hidden="true" />
+            </button>
+          </li>
+        ))}
+      </ul>
+      <form method="dialog" class="mt-4 text-center">
+        <button class="min-h-11 px-6 text-sm font-semibold text-am2-ink/70 hover:text-am2-ink">Cancelar</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script is:inline define:vars={{ unidades }}>
+    const gaveta = document.getElementById('gaveta');
+    const hora = (h) => {
+      const [hh, mm] = h.split(':');
+      return `${Number(hh)}h${mm === '00' ? '' : mm}`;
+    };
+    const minutos = (h) => {
+      const [hh, mm] = h.split(':').map(Number);
+      return hh * 60 + mm;
+    };
+
+    // Hora atual em Brasília, independente do fuso do celular.
+    const agora = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+    const hoje = agora.getDay();
+    const minAgora = agora.getHours() * 60 + agora.getMinutes();
+    const dias = ['domingo', 'segunda', 'terça', 'quarta', 'quinta', 'sexta', 'sábado'];
+
+    function status(horarios) {
+      if (horarios.some((h) => h === null)) return null;
+      const h = horarios[hoje];
+      if (Array.isArray(h) && minAgora >= minutos(h[0]) && minAgora < minutos(h[1])) {
+        return { aberta: true, texto: `Aberta · fecha às ${hora(h[1])}` };
+      }
+      for (let i = 0; i < 7; i++) {
+        const dia = (hoje + i) % 7;
+        const hd = horarios[dia];
+        if (!Array.isArray(hd) || (i === 0 && minAgora >= minutos(hd[0]))) continue;
+        const quando = i === 0 ? 'hoje' : i === 1 ? 'amanhã' : dias[dia];
+        return { aberta: false, texto: `Fechada · abre ${quando} às ${hora(hd[0])}` };
+      }
+      return { aberta: false, texto: 'Fechada' };
+    }
+
+    for (const u of unidades) {
+      const linhaHoje = document.querySelector(`#${u.id} [data-dia="${hoje}"]`);
+      linhaHoje.setAttribute('data-hoje', '');
+      linhaHoje.querySelector('.hoje-label').classList.remove('hidden');
+      const s = status(u.horarios);
+      if (!s) continue;
+      const cor = s.aberta ? 'bg-green-500' : 'bg-am2-red';
+      document.querySelector(`[data-dot="${u.id}"]`).className = `size-2 shrink-0 rounded-full ${cor}`;
+      document.querySelector(`[data-status="${u.id}"]`).textContent = s.texto.replace(/^\S+ · /, '');
+      document.querySelector(`[data-status-card="${u.id}"]`).innerHTML =
+        `<span class="size-2 rounded-full ${cor}"></span>${s.texto}`;
+    }
+
+    function abrir(id) {
+      document.querySelectorAll('[data-unidade]').forEach((el) => (el.hidden = el.id !== id));
+      const card = document.getElementById(id);
+      const mapa = card.querySelector('iframe[data-src]');
+      if (!mapa.src) mapa.src = mapa.dataset.src;
+      if (gaveta.open) gaveta.close();
+      history.replaceState(null, '', `#${id}`);
+      card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    document.getElementById('abrir-unidades').addEventListener('click', () => gaveta.showModal());
+    document.querySelectorAll('[data-abrir]').forEach((b) =>
+      b.addEventListener('click', () => abrir(b.dataset.abrir)),
+    );
+    document.querySelectorAll('[data-fechar]').forEach((b) =>
+      b.addEventListener('click', () => {
+        b.closest('[data-unidade]').hidden = true;
+        history.replaceState(null, '', location.pathname);
+      }),
+    );
+    gaveta.addEventListener('click', (e) => {
+      if (e.target === gaveta) gaveta.close();
+    });
+    if (unidades.some((u) => `#${u.id}` === location.hash)) abrir(location.hash.slice(1));
+  </script>
 </Base>

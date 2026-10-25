@@ -1,17 +1,35 @@
-export const unidades = [
+// Horário por dia da semana, de domingo (0) a sábado (6).
+// Use ['07:00', '17:00'], 'fechado' ou null enquanto não souber ([PREENCHER]).
+export type Horario = [string, string] | 'fechado' | null;
+
+export const diasSemana = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+
+export const unidades: {
+  id: string;
+  cidade: string;
+  rua: string;
+  bairro: string;
+  cep: string;
+  endereco: string;
+  horarios: Horario[];
+}[] = [
   {
+    id: 'hortolandia',
     cidade: 'Hortolândia',
     rua: 'R. José Agostinho, 594',
     bairro: 'Jardim Santana',
     cep: '13184-527',
     endereco: 'R. José Agostinho, 594 - Jardim Santana, Hortolândia - SP, 13184-527',
+    horarios: [null, null, null, null, null, null, null],
   },
   {
+    id: 'paulinia',
     cidade: 'Paulínia',
     rua: 'R. Nações Unidas, 73',
     bairro: 'Vila Bressani',
     cep: '13140-508',
     endereco: 'R. Nações Unidas, 73 - Vila Bressani, Paulínia - SP, 13140-508',
+    horarios: [null, null, null, null, null, null, null],
   },
 ];
 
