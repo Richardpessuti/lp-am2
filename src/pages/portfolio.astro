@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import { ArrowLeft, MessageCircle, Plus, Truck, Ruler, ShieldCheck, Wrench } from '@lucide/astro';
+import { categorias } from '../data/portfolio';
+import { whatsapp, whatsappPadrao } from '../data/contato';
+
+const diferenciais = [
+  { icon: Truck, texto: 'Entrega e retirada no prazo combinado, com troca imediata quando preciso.' },
+  { icon: Ruler, texto: 'Visita prévia ao canteiro para indicar a melhor solução.' },
+  { icon: ShieldCheck, texto: 'Projetos de montagem de andaimes e escoramentos conforme a ABNT.' },
+  { icon: Wrench, texto: 'Pós-venda e suporte na montagem, remessas, trocas e devoluções.' },
+];
+---
+
+<Base
+  title="Portfólio | AM2 Locações"
+  description="Andaimes, escoras metálicas e equipamentos para construção civil. Peça seu orçamento à AM2 Locações."
+>
+  <header class="relative overflow-hidden bg-am2-ink px-6 pb-14 pt-10 text-white">
+    <div aria-hidden="true" class="absolute -right-10 top-0 flex h-full gap-3 opacity-90">
+      <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
+      <span class="h-full w-5 -skew-x-[24deg] bg-am2-red"></span>
+      <span class="h-full w-5 -skew-x-[24deg] bg-am2-red/40"></span>
+    </div>
+    <div class="relative mx-auto max-w-md">
+      <a href="/" class="-ml-1 inline-flex min-h-11 items-center gap-2 px-1 text-sm text-white/70 hover:text-white">
+        <ArrowLeft size={16} aria-hidden="true" /> Início
+      </a>
+      <img src="/img/logo-am2.webp" alt="AM2 Locações" width="640" height="160" class="mt-6 h-auto w-40" />
+      <p class="mt-10 text-xs font-semibold uppercase tracking-[0.18em] text-am2-red">Portfólio</p>
+      <h1 class="mt-2 text-[2.25rem] font-extrabold leading-[1.02] tracking-tight">
+        Tudo para a<br />sua obra.
+      </h1>
+      <p class="mt-4 max-w-[17rem] leading-relaxed text-white/75">
+        Andaimes, escoras e equipamentos para obras de pequeno, médio e grande porte.
+      </p>
+    </div>
+  </header>
+
+  <nav aria-label="Categorias" class="sticky top-0 z-20 border-b border-am2-line bg-am2-paper/95 backdrop-blur">
+    <ul class="mx-auto flex max-w-md gap-2 overflow-x-auto px-6 py-3">
+      {categorias.map((c) => (
+        <li class="shrink-0">
+          <a href={`#${c.id}`} class="inline-flex min-h-10 items-center border border-am2-ink/20 bg-white px-4 text-sm font-semibold hover:border-am2-ink">
+            {c.titulo}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+
+  <main class="mx-auto max-w-md px-6">
+    <section class="pt-12" aria-labelledby="sobre">
+      <h2 id="sobre" class="text-2xl font-extrabold tracking-tight">Sobre a AM2</h2>
+      <p class="mt-3 leading-relaxed text-am2-ink/80">
+        Locação de equipamentos e ferramentas para construção civil. Atendimento rápido, seguro e eficiente para quem
+        vai reformar ou construir.
+      </p>
+      <ul class="mt-6 space-y-4">
+        {diferenciais.map(({ icon: Icon, texto }) => (
+          <li class="flex gap-3 text-[0.95rem] leading-snug">
+            <Icon size={20} strokeWidth={1.75} class="mt-0.5 shrink-0 text-am2-red" aria-hidden="true" />
+            {texto}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    {categorias.map((c) => (
+      <section id={c.id} class="scroll-mt-20 pt-16" aria-labelledby={`titulo-${c.id}`}>
+        {c.foto ? (
+          <img src={c.foto} alt={c.titulo} width="800" height="500" loading="lazy" class="aspect-[16/10] w-full object-cover" />
+        ) : (
+          <div class="grid aspect-[16/10] w-full place-items-center border border-dashed border-am2-ink/30 bg-am2-line/60 px-6 text-center text-sm text-am2-ink/55">
+            [FOTO: {c.titulo.toLowerCase()} em obra]
+          </div>
+        )}
+        <h2 id={`titulo-${c.id}`} class="mt-6 text-[1.75rem] font-extrabold leading-tight tracking-tight">{c.titulo}</h2>
+        <p class="mt-2 leading-relaxed text-am2-ink/75">{c.resumo}</p>
+
+        <ul class="mt-6 border-t border-am2-ink/15">
+          {c.itens.map((item) => (
+            <li class="border-b border-am2-ink/15">
+              <details class="group">
+                <summary class="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3 font-semibold [&::-webkit-details-marker]:hidden">
+                  {item.nome}
+                  <Plus size={18} class="shrink-0 text-am2-red transition-transform group-open:rotate-45" aria-hidden="true" />
+                </summary>
+                <div class="pb-5">
+                  {item.foto ? (
+                    <img src={item.foto} alt={item.nome} width="600" height="450" loading="lazy" class="mb-4 aspect-[4/3] w-full object-cover" />
+                  ) : (
+                    <div class="mb-4 grid aspect-[4/3] w-full place-items-center border border-dashed border-am2-ink/30 bg-am2-line/60 px-6 text-center text-sm text-am2-ink/55">
+                      [FOTO: {item.nome.toLowerCase()}]
+                    </div>
+                  )}
+                  <p class="text-[0.95rem] leading-relaxed text-am2-ink/80">{item.descricao}</p>
+                  <a
+                    href={whatsapp(`Olá! Vim pelo portfólio e quero um orçamento de: ${item.nome}.`)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-am2-red underline underline-offset-4 hover:text-am2-red-dark"
+                  >
+                    <MessageCircle size={16} aria-hidden="true" /> Pedir orçamento deste item
+                  </a>
+                </div>
+              </details>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+
+    <section class="mt-20 bg-am2-ink px-6 py-10 text-white" aria-labelledby="cta">
+      <h2 id="cta" class="text-2xl font-extrabold leading-tight tracking-tight">Não achou o que precisa?</h2>
+      <p class="mt-2 text-white/75">Fale com o comercial. A gente indica o equipamento certo.</p>
+      <a
+        href={whatsappPadrao}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-6 flex min-h-14 items-center justify-between gap-4 bg-am2-red px-5 font-bold transition-colors hover:bg-am2-red-dark focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-white"
+      >
+        Pedir orçamento
+        <MessageCircle size={24} aria-hidden="true" />
+      </a>
+    </section>
+  </main>
+
+  <footer class="mx-auto max-w-md px-6 pb-10 pt-10 text-xs leading-relaxed text-am2-ink/55">
+    AM2 Locações de Equipamentos Ltda<br />
+    © {new Date().getFullYear()} · <a href="https://am2loca.com.br" class="underline">am2loca.com.br</a>
+  </footer>
+</Base>

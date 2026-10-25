@@ -1,13 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import { MessageCircle, LayoutGrid, Globe, MapPin, Navigation, ChevronRight, X } from '@lucide/astro';
+import { whatsappPadrao } from '../data/contato';
 import { unidades, diasSemana, ordemDias, googleMaps, waze, mapaEmbed } from '../data/unidades';
 
-const comercial =
-  'https://api.whatsapp.com/send?phone=5519993102020&text=Oi.%20Gostaria%20de%20saber%20mais%20sobre%20o%20trabalho%20de%20voc%C3%AAs';
+const comercial = whatsappPadrao;
 
 const links = [
-  { titulo: 'Portfólio completo', href: 'https://www.canva.com/design/DAFUoLwEPOs/UK69-jgbZAzcHrJEa8Jw-A/view', icon: LayoutGrid },
+  { titulo: 'Portfólio completo', href: '/portfolio', icon: LayoutGrid },
   { titulo: 'Site oficial', href: 'https://am2loca.com.br', icon: Globe },
 ];
 
@@ -134,8 +134,7 @@ const hora = (h: string) => {
         {links.map(({ titulo, href, icon: Icon }) => (
           <a
             href={href}
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
             class="flex min-h-28 flex-col justify-between border border-am2-ink/15 bg-white p-4 transition-colors hover:border-am2-ink focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-am2-red"
           >
             <Icon size={22} strokeWidth={1.75} aria-hidden="true" />
