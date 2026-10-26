@@ -133,7 +133,7 @@ export const categorias: Categoria[] = [
           'Usada com a barra de ancoragem para fechar e travar as fôrmas de viga com mais segurança.',
       },
       {
-        nome: 'Barra de ancoragem com flange (até 1 m)', foto: url('/img/portfolio/obra-andaime.webp'),
+        nome: 'Barra de ancoragem com flange (até 1 m)', foto: url('/img/portfolio/barra-ancoragem.webp'),
         descricao:
           'Também chamada de agulha ou tirante. Trava fôrmas de pilares, vigas e muros na concretagem, sem pregos nem sarrafos.',
       },
