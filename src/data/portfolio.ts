@@ -171,7 +171,7 @@ export const categorias: Categoria[] = [
         descricao: 'Ferramentas elétricas para furos em concreto e pedra. Obra mais rápida e segura.',
       },
       {
-        nome: 'Compactadores e placas vibratórias', foto: url('/img/portfolio/placa-vibratoria.webp'),
+        nome: 'Compactadores e placas vibratórias', foto: url('/img/portfolio/sapo-compactador.webp'),
         descricao: 'Compactam solo e cascalho para uma base firme em alicerces, fundações e outras estruturas.',
       },
       {
