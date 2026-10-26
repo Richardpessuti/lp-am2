@@ -114,7 +114,7 @@ export const categorias: Categoria[] = [
         descricao: 'Montado no topo da escora para apoiar as vigas de madeira da laje. Mais estabilidade para a obra.',
       },
       {
-        nome: 'Forcado duplo fixo', foto: url('/img/portfolio/forcado.webp'),
+        nome: 'Forcado duplo fixo', foto: url('/img/portfolio/forcado-duplo.webp'),
         descricao: 'Une as vigas metálicas no topo da escora, na concretagem de lajes e colunas.',
       },
       {
