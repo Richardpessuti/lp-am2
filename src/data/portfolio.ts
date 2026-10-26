@@ -118,7 +118,7 @@ export const categorias: Categoria[] = [
         descricao: 'Une as vigas metálicas no topo da escora, na concretagem de lajes e colunas.',
       },
       {
-        nome: 'Cruzeta', foto: url('/img/portfolio/escoras.webp'),
+        nome: 'Cruzeta', foto: url('/img/portfolio/cruzeta.webp'),
         descricao:
           'Montada no tubo superior da escora (até 63 mm) para escorar painéis laterais e fundo das fôrmas de vigas. Encaixe que não se solta no transporte.',
       },
