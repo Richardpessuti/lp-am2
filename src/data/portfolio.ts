@@ -187,13 +187,13 @@ export const categorias: Categoria[] = [
 ];
 
 export const clientes = [
-  { nome: 'Hotel Class', logo: 'hotel-class' },
+  { nome: 'BRZ Empreendimentos', logo: 'brz' },
   { nome: 'Barros Pimentel', logo: 'barros-pimentel' },
   { nome: 'Arcon Engenharia', logo: 'arcon' },
-  { nome: 'Baggio Carvalho Engenharia', logo: 'baggio-carvalho' },
+  { nome: 'Seiji Engenharia', logo: 'seiji' },
   { nome: 'Cataguá Construtora', logo: 'catagua' },
   { nome: 'Carbinatto Empreendimentos', logo: 'carbinatto' },
-  { nome: 'Dekton Engenharia', logo: 'dekton' },
+  { nome: 'Congesa', logo: 'congesa' },
   { nome: 'Eco Vila Incorporadora', logo: 'eco-vila' },
   { nome: 'GRDI Construtora', logo: 'grdi' },
   { nome: 'Longitude Incorporadora', logo: 'longitude' },
