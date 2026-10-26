@@ -90,12 +90,12 @@ export const categorias: Categoria[] = [
           'Torres de painéis e diagonais para obras pesadas: viadutos, pontes e prédios com pé-direito duplo.',
       },
       {
-        nome: 'Viga metálica de escoramento de lajes', foto: url('/img/portfolio/case-grdi-1.webp'),
+        nome: 'Viga metálica de escoramento de lajes', foto: url('/img/portfolio/viga-escoramento.webp'),
         descricao:
           'Chapa de aço galvanizada ou pintada, de alta capacidade de carga. Dispensa caibros, barrotes e contrabarrotes de madeira.',
       },
       {
-        nome: 'Viga metálica de travamento de pilar', foto: url('/img/portfolio/case-hotel-class.webp'),
+        nome: 'Viga metálica de travamento de pilar', foto: url('/img/portfolio/viga-travamento.webp'),
         descricao:
           'Cintas metálicas, barras de ancoragem e presilhas para alinhar pilares e vigas com menos madeira.',
       },
@@ -105,7 +105,7 @@ export const categorias: Categoria[] = [
           'Apoia vigas no escoramento. Montado no topo da escora fixa ou da torre regulável. Serve para uma viga ou para unir duas.',
       },
       {
-        nome: 'Forcado misto regulável', foto: url('/img/portfolio/forcado.webp'),
+        nome: 'Forcado misto regulável', foto: url('/img/portfolio/forcado-regulavel.webp'),
         descricao:
           'Apoia vigas no escoramento, com regulagem. Montado no topo da escora ou da torre. Serve para uma viga ou para unir duas.',
       },
