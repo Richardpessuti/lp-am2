@@ -128,7 +128,7 @@ export const categorias: Categoria[] = [
           'Mantém a escora firme na vertical e facilita a montagem das vigas. Fixação rápida por cunha. Para tubos de 40 a 65 mm.',
       },
       {
-        nome: 'Presilha de viga (cachorrinho)', foto: url('/img/portfolio/case-residencia-1.webp'),
+        nome: 'Presilha de viga (cachorrinho)', foto: url('/img/portfolio/presilha-viga.webp'),
         descricao:
           'Usada com a barra de ancoragem para fechar e travar as fôrmas de viga com mais segurança.',
       },
