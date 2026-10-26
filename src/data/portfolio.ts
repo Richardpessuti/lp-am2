@@ -138,7 +138,7 @@ export const categorias: Categoria[] = [
           'Também chamada de agulha ou tirante. Trava fôrmas de pilares, vigas e muros na concretagem, sem pregos nem sarrafos.',
       },
       {
-        nome: 'Aprumador de pilar', foto: url('/img/portfolio/case-grdi-2.webp'),
+        nome: 'Aprumador de pilar', foto: url('/img/portfolio/aprumador-pilar.webp'),
         descricao:
           'Deixa painéis e fôrmas no prumo em muros, paredes e colunas. Regulagem por rosca de 1 1/4" para ajuste rápido e preciso.',
       },
