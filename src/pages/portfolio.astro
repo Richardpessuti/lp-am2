@@ -223,9 +223,9 @@ const orcamento = (nome: string) => whatsapp(`Olá! Vim pelo portfólio e quero 
                 <li class="border-b border-am2-ink/15">
                   <details class="group">
                     <summary class="flex min-h-16 cursor-pointer list-none items-center gap-4 py-2 font-semibold [&::-webkit-details-marker]:hidden">
-                      <span class:list={['grid size-14 shrink-0 place-items-center overflow-hidden bg-white', !(item.foto && ehFoto(item.foto)) && 'p-1.5']}>
+                      <span class="relative size-14 shrink-0 overflow-hidden bg-white">
                         {item.foto && (
-                          <img src={item.foto} alt="" loading="lazy" class:list={['h-full w-full', ehFoto(item.foto) ? 'object-cover' : 'object-contain']} />
+                          <img src={item.foto} alt="" loading="lazy" class:list={['absolute max-h-none', ehFoto(item.foto) ? 'inset-0 size-full object-cover' : 'inset-1.5 size-[calc(100%-0.75rem)] object-contain']} />
                         )}
                       </span>
                       <span class="flex-1 leading-snug">{item.nome}</span>
@@ -245,9 +245,9 @@ const orcamento = (nome: string) => whatsapp(`Olá! Vim pelo portfólio e quero 
             <ul class="hidden self-start border-l border-t border-am2-line lg:col-span-8 lg:grid lg:grid-cols-2 xl:grid-cols-3">
               {c.itens.map((item) => (
                 <li class="group flex flex-col border-b border-r border-am2-line bg-white p-6">
-                  <div class:list={['grid aspect-[4/3] place-items-center overflow-hidden', item.foto && ehFoto(item.foto) ? '' : 'p-4']}>
+                  <div class="relative aspect-[4/3] overflow-hidden">
                     {item.foto && (
-                      <img src={item.foto} alt={item.nome} loading="lazy" class:list={['h-full w-full', ehFoto(item.foto) ? 'object-cover' : 'object-contain transition-transform duration-300 group-hover:scale-105']} />
+                      <img src={item.foto} alt={item.nome} loading="lazy" class:list={['absolute max-h-none', ehFoto(item.foto) ? 'inset-0 size-full object-cover' : 'inset-4 size-[calc(100%-2rem)] object-contain']} />
                     )}
                   </div>
                   <h4 class="mt-5 font-bold leading-snug">{item.nome}</h4>
